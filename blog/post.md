@@ -104,7 +104,7 @@ Expert (reads exact physics)                100%
 
 Practice didn't reuse the original data at all. The model created its own — including mistakes the expert never made — which is exactly the kind of data that's hard to collect in the real world.
 
-**A note on scale:** my practice stage was deliberately simple — a basic version of a standard RL method (PPO), written directly in PyTorch in about 150 lines and running 16 worlds at once. Production teams use dedicated RL frameworks such as [RLinf](https://github.com/RLinf/RLinf), which spread practice across many GPUs and handle large robot models. The idea is the same; the scale is not.
+**A note on scale:** my practice stage was deliberately simple — a basic version of a standard RL method (PPO), written directly in PyTorch as a single script of a couple hundred lines, running 16 worlds at once. Production teams use dedicated RL frameworks such as [RLinf](https://github.com/RLinf/RLinf), which spread practice across many GPUs and handle large robot models. The idea is the same; the scale is not.
 
 ### Result 3: Simulation provides an answer key
 
