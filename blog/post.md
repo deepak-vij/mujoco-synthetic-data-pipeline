@@ -66,6 +66,7 @@ The expert has an unfair advantage: it reads the exact physics, which no real ro
 
 - **It demonstrates rather than annotates.** A labeler marks up data after it exists. The expert acts inside the simulation, so it creates the data and its labels in the same pass.
 - **Its closest human equivalent is teleoperation,** where a person drives the robot while it's recorded. That's how most real-world robot datasets are collected, and it's the slow, expensive step behind the scarcity described above.
+- **It's code.** It never tires, costs nothing per example, and reads physics no human could see in an image.
 
 Replacing the human demonstrator with code in a simulator is what turned weeks of collection into two minutes. The catch is that a code expert only exists for tasks we can solve mathematically. For tasks like folding laundry, teams still start from human demonstrations and use them to seed large-scale synthetic generation — the approach behind NVIDIA's pipeline mentioned earlier.
 
