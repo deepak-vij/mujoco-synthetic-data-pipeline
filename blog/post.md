@@ -4,6 +4,8 @@ Sep 23, 2026 · Deepak Vij
 
 *Language models learned from the internet. Robots have no internet to learn from. Simulation may be how we build one.*
 
+![A simulated cart-pole balancing in MuJoCo](images/hero_cartpole.png)
+
 AI that acts in the physical world — robots that grasp, walk and balance — is often called embodied AI. Its biggest constraint isn't model design or computing power. It's data. Large language models learned from trillions of words people had already written down. Nobody has been recording, at scale, how to grasp a cup, fold a towel or balance a pole on a moving cart.
 
 My argument is simple: **simulation turns robot data from something you collect into something you generate.** Once software generates the data, how much you have, how varied it is and how well it's labeled become choices, not hard limits.
