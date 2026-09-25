@@ -102,15 +102,13 @@ Expert (reads exact physics)              100%
 
 This is the part of simulation that's easy to underrate. RL didn't reuse the dataset at all. It generated its own data — including the mistakes the expert never made — which is exactly the kind of data real-world collection struggles to produce.
 
-### Proof point 3: Simulation supervises what the real world can't
+### Proof point 3: Simulation provides an answer key
 
-At three points, the pipeline used information only a simulator has:
+A simulator knows the exact angle, speed and position of everything. The real world never gives you that — a real robot only has its camera.
 
-- The **expert** used the exact physics to act perfectly.
-- During imitation, the model also had to predict the **true state** from images — free labels that taught it what to look for.
-- During RL, a **critic** network that saw the true state judged each move, while the policy itself saw only pixels.
+I couldn't give that answer key to the final policy, but I could use it during training. The expert used it to demonstrate. The student was also quizzed on it — "what's the pole's angle?" — which taught it what to look for in the image. And during RL, a helper model used it to grade each practice move.
 
-None of that privileged information is needed once the policy is trained. But during training, it is a form of supervision that simply doesn't exist outside simulation.
+After training, the answer key is discarded and the policy works from camera images alone. Real-world data can't offer this kind of teaching signal at any price.
 
 ![The RL-refined policy balancing in four unseen worlds](images/eval_rl.gif)
 
