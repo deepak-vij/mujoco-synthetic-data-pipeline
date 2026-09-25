@@ -50,11 +50,17 @@ The task: balance a pole on a moving cart using **only camera images** — no di
 
 ```
 Simulate  ->  Generate synthetic data  ->  Imitate  ->  Evaluate  ->  Practice with RL
-(MuJoCo)      (randomized worlds,          (copy the    (unseen       (reward from the
-               expert demonstrations)       expert)      worlds)       simulator)
+(MuJoCo)      (expert demos recorded       (copy the    (unseen       (reward from the
+               in randomized worlds)        expert)      worlds)       simulator)
 ```
 
-The "expert" was a classic control-theory controller that could read the simulator's exact physics — something no real robot can do. The student had to learn the same skill from images alone.
+### Where the demonstrations come from
+
+A simulator only computes consequences: apply a force, and MuJoCo tells you what happens next. It never decides what force to apply. Left alone, the pole simply falls.
+
+So each demonstration needs an **expert**: a controller that picks the right action at every step while the simulator records the result. Mine was LQR, a standard technique from control theory that computes the best balancing rule directly from the simulator's physics. It was recalculated for every randomized world and balanced the pole in 100% of test worlds.
+
+The expert has an unfair advantage: it reads the exact physics, which no real robot can. The student model has to learn the same skill from camera images alone.
 
 ![The same task across randomized worlds](images/randomization_grid.png)
 
