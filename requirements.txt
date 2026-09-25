@@ -1,0 +1,10 @@
+mujoco==3.14.0
+numpy==2.2.6
+scipy==1.18.1
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+av==15.1.0
+pandas==2.3.3
+torch==2.11.0
+lerobot[dataset]==0.6.1
