@@ -8,7 +8,7 @@ AI that acts in the physical world — robots that grasp, walk and balance — i
 
 My argument is simple: **simulation turns robot data from something you collect into something you generate.** Once software generates the data, how much you have, how varied it is and how well it's labeled become choices, not hard limits.
 
-To test this, I built the whole process myself: simulate a robot task, generate training examples, teach a model by imitation, then let it improve by practicing in the simulator.
+To test this, I built a complete synthetic data pipeline myself, end to end, on a real physics simulator: simulate a robot task, generate training data automatically, teach a model by imitation, then let it improve by practicing in the simulator.
 
 ## The robot data gap
 
@@ -42,7 +42,7 @@ The same NVIDIA announcement reported that adding simulated data to real data ma
 
 ## Putting the idea to the test
 
-To see these advantages for myself, I built the whole process at small scale with free, open-source tools: the MuJoCo physics simulator, Hugging Face's LeRobot data format and PyTorch.
+To see these advantages for myself, I built a complete, working pipeline from scratch, on the same kind of physics simulator robotics researchers use. It produces all of its own training data — no hand-collected data at all. Every tool is free and open source: the MuJoCo physics simulator, Hugging Face's LeRobot data format and PyTorch.
 
 The task: keep a pole balanced on a moving cart, using **only camera images**. When it runs, the model is never told the pole's angle; it has to see it. Balancing a pole is a classic beginner problem in robotics, but doing it from images means the model must learn both to see and to act.
 
@@ -103,6 +103,8 @@ Expert (reads exact physics)                100%
 ```
 
 Practice didn't reuse the original data at all. The model created its own — including mistakes the expert never made — which is exactly the kind of data that's hard to collect in the real world.
+
+**A note on scale:** my practice stage was deliberately simple — a basic version of a standard RL method (PPO), written directly in PyTorch in about 150 lines and running 16 worlds at once. Production teams use dedicated RL frameworks such as [RLinf](https://github.com/RLinf/RLinf), which spread practice across many GPUs and handle large robot models. The idea is the same; the scale is not.
 
 ### Result 3: Simulation provides an answer key
 
