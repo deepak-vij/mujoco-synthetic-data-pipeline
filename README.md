@@ -1,24 +1,26 @@
 # MuJoCo synthetic data pipeline for embodied AI
 
-A minimal, end-to-end version of the loop used to train robot policies:
-simulate → generate synthetic data → imitation learning → evaluate → RL fine-tuning.
+A small, end-to-end example of how robots can learn from simulated data:
+simulate → generate data → learn by imitation → test → improve by practice.
 Everything runs on commodity hardware; no GPU cluster required. Training uses a GPU automatically when one is available (CUDA or Apple MPS) and falls back to CPU.
 
 | Step | File | What it does |
 |---|---|---|
-| 1. Simulate | `cartpole.py` | MuJoCo cart-pole + LQR expert controller |
-| 2. Generate data | `datagen.py` | Domain-randomized episodes saved as a LeRobot dataset |
-| 3. Imitate | `train.py` | CNN policy from 3 stacked camera frames (behavior cloning) |
-| 4. Evaluate | `evaluate.py` | Closed-loop tests on held-out worlds vs expert and do-nothing |
-| 5. Refine | `rl_finetune.py` | PPO fine-tuning in 16 parallel randomized worlds |
+| 1. Simulate | `cartpole.py` | MuJoCo cart-pole simulation, plus an expert controller that balances the pole perfectly |
+| 2. Generate data | `datagen.py` | Records the expert in many randomly varied worlds, saved as a LeRobot dataset |
+| 3. Imitate | `train.py` | Trains a model to copy the expert using only camera images (behavior cloning) |
+| 4. Test | `evaluate.py` | Tests models in new worlds they never trained on, compared with the expert and with doing nothing |
+| 5. Practice | `rl_finetune.py` | Improves the model by trial and error in 16 simulated worlds at once (reinforcement learning with PPO) |
 
-## Results (50 held-out worlds)
+## Results (50 new test worlds, never used in training)
 
-| Policy | Success | Mean max tilt |
+Each test world has its own random weights, friction, colors and camera angle.
+
+| Approach | Success | Average worst pole tilt |
 |---|---|---|
-| Expert (true state) | 100% | 4.8° |
-| Imitation, pixels only | 74% | 16.2° |
-| Imitation + RL | 84% | 12.2° |
+| Expert (reads exact physics) | 100% | 4.8° |
+| Imitation only (camera images) | 74% | 16.2° |
+| Imitation + practice (RL) | 84% | 12.2° |
 | Do nothing | 0% | 46.0° |
 
 ## Run it
