@@ -158,13 +158,11 @@ The tools are within reach. MuJoCo runs on ordinary computers. NVIDIA Isaac Sim 
 
 ## What building it myself taught me
 
-Three lessons only became clear by doing it:
+Two lessons only became clear by doing it:
 
 **The simulator does exactly what you describe — mistakes included.** My first run failed because a decorative rail overlapped the cart, and the simulator dutifully created friction that jammed it in place. Simulated data is only as good as the simulated world.
 
 **Practice builds on the trained model, not the dataset.** I assumed the practice stage would reuse the simulated data. It doesn't. The data trains the first model; practice starts from that model and creates its own new data. The simulator plays two roles: data factory first, practice ground second.
-
-**Testing is where claims hold up or fall apart.** A 20-run test told me one story and a 50-run test told me another. A suspiciously good number once turned out to be a bug. Check good results as hard as bad ones.
 
 ## The bottom line
 
