@@ -81,16 +81,16 @@ Three results support the argument.
 I trained the same model, the same way, on two amounts of simulated data:
 
 ```
-Simulated examples     Time to generate    Success in new worlds
- 50 runs                    30 sec               35%
-200 runs                     2 min               85%
+Simulated examples     Time to generate    Success in 50 new worlds
+ 50 runs                    30 sec               34%
+200 runs                     2 min               74%
 ```
 
-Nothing changed except the amount of data — and making four times more took two minutes. In the real world, that would mean weeks of teleoperation. In simulation, it's one setting.
+Nothing changed except the amount of data, and success more than doubled — while making four times more data took two minutes. In the real world, that would mean weeks of teleoperation. In simulation, it's one setting.
 
 ### Result 2: The simulator doubled as a practice ground
 
-Learning by imitation has a weakness: the model only sees situations the expert got into. When it drifts somewhere new, it has no example to follow. In 50 new worlds, the imitation-trained model succeeded 74% of the time.
+Learning by imitation has a weakness: the model only sees situations the expert got into. When it drifts somewhere new, it has no example to follow. That's why the imitation-trained model from Result 1 topped out at 74%.
 
 Then I let it practice with reinforcement learning (RL) — learning by trial and error. It tried the task in 16 simulated worlds at once, got a score for every move, and adjusted toward what worked. After about seven minutes:
 
@@ -138,7 +138,7 @@ These are easier than hand-collecting millions of examples, because each is solv
 
 ### The limits of my experiment
 
-My results come from one simple task, and small tests are noisy. The 85% in Result 1 came from a quick 20-run test; a more careful 50-run test scored the same model at 74%. The trends are clear; the exact numbers should be taken loosely.
+My results come from one simple task, and every model was tested on the same 50 new worlds. With that few tests, each number could shift by several points. The trends are clear; the exact numbers should be taken loosely.
 
 ## What this means for teams building robots
 
